@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InstansiController;
@@ -26,6 +27,8 @@ use App\Models\SuratKeluar;
 Route::get('/', function() {
         return view('admin.dashboard.index');
 });
+
+Auth::routes();
 
 Route::get('/dashboard', [DashboardController::class, "index"]);
 Route::get('/unitkerja', [UnitKerjaController::class, "index"]);
