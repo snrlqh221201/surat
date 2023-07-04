@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\pengguna;
+use App\Models\UnitKerja;
 use Illuminate\Http\Request;
 
 class PenggunaController extends Controller
@@ -12,8 +13,9 @@ class PenggunaController extends Controller
      */
     public function index()
     {
-            $data = Pengguna::all();
-            return view ('admin.setupmanagement.pengguna.index', compact('data'));
+        $data = Pengguna::with('unitKerja')->get();
+
+        return view ('admin.setupmanagement.pengguna.index', compact('data'));
         
     }
 
@@ -22,8 +24,9 @@ class PenggunaController extends Controller
      */
     public function create()
     {
-            $data = Pengguna::all();
-            return view ('admin.setupmanagement.pengguna.add', compact('data'));
+        $unitKerja = UnitKerja::pluck('namaunit', 'id');
+
+        return view ('admin.setupmanagement.pengguna.add', compact('unitKerja'));
     }
     
 
@@ -32,13 +35,14 @@ class PenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        $simpan = Pengguna::create([
+        Pengguna::create([
             'usrname' => $request->username,
             'nama'=> $request->nama,
             'hakakses'=> $request->hakakses,  
-            'namaunit'=> $request->unitkerja,
+            'unit_kerja_id'=> $request->unit_kerja_id,
         ]);
-        
+
+        return redirect('pengguna');
     }
 
     /**
@@ -52,17 +56,28 @@ class PenggunaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(pengguna $pengguna)
+    public function edit($id)
     {
-        //
+        $data = Pengguna::findOrFail($id);
+        $unitkerjas = UnitKerja::select('id', 'namaunit')->get();
+
+        return view ('admin.setupmanagement.pengguna.edit', compact('data', 'unitkerjas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, pengguna $pengguna)
+    public function update(Request $request, $id)
     {
-        //
+        $data = Pengguna::findOrFail($id);
+        $data->usrname = $request->username;
+        $data->nama = $request->nama;
+        $data->hakakses = $request->hakakses; 
+        $data->namaunit = $request->unit_kerja_id;
+
+        $data->update();
+
+        return redirect()->route('pengguna.index');
     }
 
     /**

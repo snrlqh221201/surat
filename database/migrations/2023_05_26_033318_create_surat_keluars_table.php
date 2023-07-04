@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('surat_keluars', function (Blueprint $table) {
             $table->id();
-            $table->string('no');
             $table->string('tanggal');
             $table->string('nosurat');
             $table->string('perihal');
-            $table->unsignedBigInteger('unitkerja_id');
+            $table->string('sifat_surat');
+            $table->unsignedBigInteger('unit_kerja_id');
             $table->string('kepada');
             $table->timestamps();
         });

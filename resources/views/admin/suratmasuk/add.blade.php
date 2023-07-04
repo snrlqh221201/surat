@@ -14,31 +14,36 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputUser">Tanggal</label>
-                                    <input type="text" name="tanggal" class="form-control" id="exampleInputtanggal" placeholder="Masukkan Tanggal">
+                                    <input type="date" name="tanggal" class="form-control" id="exampleInputtanggal" placeholder="Masukkan Tanggal">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUser">No Surat</label>
+                                    <label for="exampleInputSuratMasuk">No Surat</label>
                                     <input type="text" name="nosurat" class="form-control" id="exampleInputnosurat" placeholder="Masukkan No Surat">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUser">Sifat Surat</label>
-                                    <input type="text" name="sifatsurat" class="form-control" id="exampleInputsifatsurat" placeholder="Masukkan Sifat Surat">
+                                    <label for="exampleInputSuratMasuk">Sifat Surat</label>
+                                    <input type="text" name="sifat_surat" class="form-control" id="exampleInputsifatsurat" placeholder="Masukkan Sifat Surat">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUser">Perihal</label>
+                                    <label for="exampleInputSuratMasuk">Perihal</label>
                                     <input type="text" name="perihal" class="form-control" id="exampleInputperihal" placeholder="Masukkan Perihal">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUser">Pengirim</label>
+                                    <label for="exampleInputSuratMasuk">Pengirim</label>
                                     <input type="text" name="pengirim" class="form-control" id="exampleInputpengirim" placeholder="Masukkan pengirim">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUser">Unit Kerja</label>
-                                    <input type="text" name="unitkerja" class="form-control" id="exampleInputunitkerja" placeholder="Masukkan Unit Kerja">
+                                    <label for="exampleInputSuratMasuk">Unit Kerja</label>
+                                    <select class="form-select" aria-label=".form-select-sm example" name="unit_kerja_id">
+                                        <option selected>Pilih Unit Kerja</option>
+                                        @foreach ($unitKerja as $id => $item)
+                                            <option value="{{ $id }}">{{ $item }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </form>
                     </div>

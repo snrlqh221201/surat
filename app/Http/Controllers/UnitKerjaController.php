@@ -13,6 +13,7 @@ class UnitKerjaController extends Controller
     public function index()
     {
         $data = UnitKerja::all();
+        
         return view ('admin.setupmanagement.unitkerja.index', compact('data'));
     }
 
@@ -21,8 +22,7 @@ class UnitKerjaController extends Controller
      */
     public function create()
     {
-        $data = UnitKerja::all();
-        return view ('admin.setupmanagement.unitkerja.add', compact('data'));
+        return view ('admin.setupmanagement.unitkerja.add');
     }
 
     /**
@@ -30,14 +30,11 @@ class UnitKerjaController extends Controller
      */
     public function store(Request $request)
     {
-        $simpan = UnitKerja::create([
+        UnitKerja::create([
             'namaunit' => $request->namaunit,
         ]);
 
-        if ($simpan) {
-            $data = UnitKerja::all();
-            return view('admin.setupmanagement.unitkerja.index', compact('data'));
-        }
+        return redirect()->route('unitkerja.index');
     }
 
     /**
@@ -51,24 +48,34 @@ class UnitKerjaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UnitKerja $unitKerja)
+    public function edit($id)
     {
-        //
+        $data = UnitKerja::findOrFail($id);
+
+        return view('admin.setupmanagement.unitkerja.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UnitKerja $unitKerja)
+    public function update(Request $request, $id)
     {
-        //
+        $data = UnitKerja::findOrFail($id);
+        $data->namaunit = $request->namaunit;
+
+        $data->update();
+
+        return redirect()->route('unitkerja.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UnitKerja $unitKerja)
+    public function destroy($id)
     {
-        //
+        $data = UnitKerja::findOrFail($id);
+        $data->delete();
+
+        return back()->with('message', 'Data berhasil didelete!');
     }
 }

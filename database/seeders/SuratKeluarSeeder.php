@@ -17,8 +17,9 @@ class SuratKeluarSeeder extends Seeder
         SuratKeluar::create([
             'tanggal' => '12 may 2023',
             'nosurat' => '01/08/20/2023',
-            'perihal' => 'penting',
-            'unitkerja_id' => 1,
+            'perihal' => 'callcenter',
+            'sifatsurat'=>'penting',
+            'unit_kerja_id' => 1,
             'kepada' => 'pt.kominfo',
         ]);
     }

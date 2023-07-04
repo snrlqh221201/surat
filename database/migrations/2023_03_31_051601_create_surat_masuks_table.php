@@ -16,9 +16,9 @@ return new class extends Migration
             $table->string('tanggal');
             $table->string('nosurat');
             $table->string('perihal');
-            $table->string('sifat surat');
+            $table->string('sifat_surat');
             $table->string('pengirim');
-            $table->unsignedBigInteger('unitkerja_id');
+            $table->unsignedBigInteger('unit_kerja_id');
             $table->timestamps();
         });
     }

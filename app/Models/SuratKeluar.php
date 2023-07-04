@@ -12,9 +12,9 @@ class SuratKeluar extends Model
         'tanggal',
         'nosurat',
         'perihal',
-        'sifat surat',
+        'sifat_surat',
+        'unit_kerja_id',
         'kepada',
-        'unitkerja_id',
     ];
 
     public function UnitKerja(){

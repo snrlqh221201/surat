@@ -13,7 +13,7 @@ class UnitKerja extends Model
         'namaunit',
     ];
 
-    public function SuratMasuk() {
+    public function suratMasuk() {
         return $this->hasMany(SuratMasuk::class);
     }
 }

@@ -10,9 +10,10 @@ class ReportMasukController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function Reportsurat()
     {
-        //
+        $data = ReportMasuk::all();
+        return view ('admin.reportsurat.suratmasuk.index', compact('data'));
     }
 
     /**

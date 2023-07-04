@@ -7,43 +7,46 @@
                 <div class="col-md-12">
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Surat Keluar</h3>
+                            <h3 class="card-title">Edit Surat Keluar</h3>
                         </div>
-                        <form method="POST" action="/daftarsuratkeluar/store">
+                        <form action="{{ route('suratkeluar.update', $data->id) }}" method="POST">
+                             @method('put')
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputUser">Tanggal</label>
-                                    <input type="date" name="tanggal" class="form-control" id="exampleInputtanggal" placeholder="Masukkan Tanggal">
+                                    @php use Carbon\Carbon; @endphp
+                                    
+                                    <label for="exampleInputSuratMasuk">Tanggal</label>
+                                    <input type="date" name="tanggal" class="form-control" id="exampleInputtanggal" placeholder="Masukkan Tanggal" value="{{ Carbon::parse($data->tanggal)->format('Y-m-d') }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputUser">No Surat</label>
-                                    <input type="text" name="nosurat" class="form-control" id="exampleInputnosurat" placeholder="Masukkan No Surat">
+                                    <input type="text" name="nosurat" class="form-control" id="exampleInputnosurat" placeholder="Masukkan No Surat" value="{{ $data->nosurat }}"n>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputUser">Perihal</label>
-                                    <input type="text" name="perihal" class="form-control" id="exampleInputperihal" placeholder="Masukkan Perihal">
+                                    <input type="text" name="perihal" class="form-control" id="exampleInputperihal" placeholder="Masukkan Perihal" value="{{ $data->perihal}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputUser">Sifat Surat</label>
-                                    <input type="text" name="sifat_surat" class="form-control" id="exampleInputsifatsurat" placeholder="Masukkan Sifat Surat">
+                                    <input type="text" name="sifat_surat" class="form-control" id="exampleInputsifatsurat" placeholder="Masukkan Sifat Surat" value="{{ $data->sifat_surat}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputUser">Unit Kerja</label>
                                     <select class="form-select" aria-label=".form-select-sm example" name="unit_kerja_id">
                                         <option selected>Pilih Unit Kerja</option>
-                                        @foreach ($unitKerja as $id => $item)
-                                            <option value="{{ $id }}">{{ $item }}</option>
+                                        @foreach ($unitkerjas as $item)
+                                            <option value="{{ $item->id }}" {{ $item->id == $data->unit_kerja_id ? 'selected' : '' }}>{{ $item->namaunit }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputUser">Kepada</label>
-                                    <input type="text" name="kepada" class="form-control" id="exampleInputkepada" placeholder="Masukkan kepada">
+                                    <input type="text" name="kepada" class="form-control" id="exampleInputkepada" placeholder="Masukkan Kepada" value="{{ $data->kepada }}">
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </form>
                     </div>

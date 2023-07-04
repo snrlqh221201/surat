@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('usrname');
             $table->string('nama');
             $table->string('hakakses');
-            $table->string('namaunit');
+            $table->unsignedBigInteger('unit_kerja_id');
             $table->timestamps();
         });
     }

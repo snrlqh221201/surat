@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SuratKeluar;
+use App\Models\UnitKerja;
 use Illuminate\Http\Request;
 
 class SuratKeluarController extends Controller
@@ -12,7 +13,8 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        $data = SuratKeluar::all();
+        $data = SuratKeluar::with('unitKerja')->get();
+
         return view ('admin.suratkeluar.index', compact('data'));
     }
 
@@ -21,8 +23,9 @@ class SuratKeluarController extends Controller
      */
     public function create()
     {
-        $data = SuratKeluar::all();
-        return view ('admin.suratkeluar.add', compact('data'));
+        $unitKerja = UnitKerja::pluck('namaunit', 'id');
+
+        return view ('admin.suratkeluar.add', compact('unitKerja'));
     }
 
     /**
@@ -30,19 +33,17 @@ class SuratKeluarController extends Controller
      */
     public function store(Request $request)
     {
-        $simpan = SuratKeluar::create([
+        SuratKeluar::create([
             'tanggal' => $request->tanggal,
             'nosurat' => $request->nosurat,
             'perihal' =>$request->perihal,
-            'sifat surat' => $request->sifatsurat,
+            'sifat_surat' => $request->sifat_surat,
             'kepada'=> $request->kepada,
-            'unitkerja_id'=> $request->untikerja_id, 
+            'unit_kerja_id'=> $request->unit_kerja_id,
         ]);
 
-        if ($simpan) {
-            $data = SuratKeluar::all();
-            return view ('admin.suratkeluar.index', compact('data'));
-        }
+        return redirect()->route('suratkeluar');
+        
     }
 
     /**
@@ -56,18 +57,33 @@ class SuratKeluarController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(SuratKeluar $suratKeluar)
-    {
-        //
-    }
+        public function edit($id)
+        {
+            $data = SuratKeluar::findOrFail($id);
+            $unitkerjas = UnitKerja::select('id', 'namaunit')->get();
 
+            return view('admin.suratkeluar.edit', compact('data', 'unitkerjas'));
+        }
+    
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, SuratKeluar $suratKeluar)
-    {
-        //
-    }
+    public function update(Request $request, $id)
+    
+        {
+            $data = SuratKeluar::findOrFail($id);
+            $data->tanggal = $request->tanggal;
+            $data->nosurat = $request->nosurat;
+            $data->perihal = $request->perihal;
+            $data->sifat_surat = $request->sifat_surat;
+            $data->unit_kerja_id = $request->unit_kerja_id;
+            $data->kepada = $request->kepada;
+    
+            $data->update();
+    
+            return redirect()->route('suratkeluar');
+        }
+    
 
     /**
      * Remove the specified resource from storage.

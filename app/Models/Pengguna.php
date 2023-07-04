@@ -13,6 +13,10 @@ class Pengguna extends Model
         'usrname',
         'nama',
         'hakakses',
-        'namaunit',
+        'unit_kerja_id',
     ];
+
+    public function UnitKerja(){
+        return $this->belongsTo(UnitKerja::class);
+    }
 }

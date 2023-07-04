@@ -13,12 +13,12 @@ class SuratMasuk extends Model
         'tanggal',
         'nosurat',
         'perihal',
-        'sifat surat',
+        'sifat_surat',
         'pengirim',
-        'unitkerja_id',
+        'unit_kerja_id',
     ];
 
-    public function UnitKerja(){
+    public function unitKerja(){
         return $this->belongsTo(UnitKerja::class);
     }
 }

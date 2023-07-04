@@ -14,12 +14,12 @@ class SuratMasukSeeder extends Seeder
     public function run(): void
     {
         SuratMasuk::create([                                                
-            'tanggal' => '12 may 2023',
-            'nosurat' => '01/08/20/2023',
-            'perihal' => 'riset penelitian',
-            'sifat surat' => 'penting',
-            'pengirim' => 'pt kominfo',
-            'unitkerja_id' => 1,
+            'tanggal' => '2023/05/12',
+            'nosurat' => '12/23/0409',
+            'perihal' => 'Riset Penelitian',
+            'sifat_surat' => 'Penting',
+            'pengirim' => 'PT. Kominfo',
+            'unit_kerja_id' => 1,
         ]);
     }
 }
