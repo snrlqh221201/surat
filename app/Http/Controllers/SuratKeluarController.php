@@ -42,7 +42,7 @@ class SuratKeluarController extends Controller
             'unit_kerja_id'=> $request->unit_kerja_id,
         ]);
 
-        return redirect()->route('suratkeluar');
+        return redirect()->route('suratkeluar')->with('message', 'Data berhasil dibuat!');
         
     }
 
@@ -81,15 +81,18 @@ class SuratKeluarController extends Controller
     
             $data->update();
     
-            return redirect()->route('suratkeluar');
+            return redirect()->route('suratkeluar')->with('message', 'Data berhasil diperbarui!');
         }
     
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SuratKeluar $suratKeluar)
+    public function destroy($id)
     {
-        //
+        $data = SuratKeluar::findOrFail($id);
+        $data -> delete();
+
+        return back()->with('message', 'Data berhasil didelete!');
     }
 }

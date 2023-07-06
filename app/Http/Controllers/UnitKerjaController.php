@@ -34,7 +34,7 @@ class UnitKerjaController extends Controller
             'namaunit' => $request->namaunit,
         ]);
 
-        return redirect()->route('unitkerja.index');
+        return redirect()->route('unitkerja.index')->with('message', 'Data berhasil dibuat!');
     }
 
     /**
@@ -65,7 +65,8 @@ class UnitKerjaController extends Controller
 
         $data->update();
 
-        return redirect()->route('unitkerja.index');
+        return redirect()->route('unitkerja.index')->with('message', 'Data berhasil diperbarui!');
+    
     }
 
     /**

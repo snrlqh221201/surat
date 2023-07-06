@@ -5,6 +5,11 @@
     <!-- DataTales Example -->
     <section class="content">
         <div class="container-fluid">
+            @if(session('message'))
+                <div id="pesan-flash" class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -42,11 +47,11 @@
                             <td>{{ $item->unitKerja ? $item->unitKerja->namaunit : '-' }}</td>
                             <td class="text-center d-flex">
                                 <a href="{{ route('tambahpengguna.edit', $item->id) }}" class="btn btn-sm btn-warning me-1">Edit</a>
-                                {{-- <form method="post" action="{{ route('.delete', $item->id) }}">
+                                <form method="post" action="{{ route('pengguna.delete', $item->id) }}">
                                     @csrf
                                     @method('delete')
                                     <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                </form> --}}
+                                </form>
                             </td>
                         </tr>
                         @endforeach         

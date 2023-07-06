@@ -42,7 +42,7 @@ class SuratMasukController extends Controller
             'unit_kerja_id'=> $request->unit_kerja_id,
         ]);
         
-        return redirect()->route('suratmasuk');
+        return redirect()->route('suratmasuk')->with('message', 'Data berhasil dibuat!');
     }
 
     /**
@@ -80,14 +80,17 @@ class SuratMasukController extends Controller
 
         $data->update();
 
-        return redirect()->route('suratmasuk');
+        return redirect()->route('suratmasuk')->with('message', 'Data berhasil diperbarui!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(SuratMasuk $suratMasuk)
+    public function destroy($id)
     {
-        //
+        $data = SuratMasuk::findOrFail($id);
+        $data->delete();
+
+        return back()->with('message','Data berhasil didelete!');
     }
 }

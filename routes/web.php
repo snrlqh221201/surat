@@ -46,26 +46,24 @@ Route::get('/tambahpengguna', [PenggunaController::class, "create"]);
 Route::post('/daftarpengguna/store', [PenggunaController::class, "store"]);
 Route::get('/tambahpengguna/{id}/edit', [PenggunaController::class, "edit"])->name('tambahpengguna.edit');
 Route::put('/tambahpengguna/{id}/update', [PenggunaController::class, "update"])->name('pengguna.update');
+Route::delete('/tambahpengguna/{id}/delete', [PenggunaController::class, "destroy"])->name('pengguna.delete');
 
-Route::get('/suratmasuk',[SuratMasukController::class, "index"])->name('suratmasuk');
+Route::get('/suratmasuk', [SuratMasukController::class, "index"])->name('suratmasuk');
 Route::get('/tambahsuratmasuk', [SuratMasukController::class, "create"]);
 Route::post('/daftarsuratmasuk/store', [SuratMasukController::class, "store"]);
 Route::get('/suratmasuk/{id}/edit', [SuratMasukController::class, 'edit'])->name('suratmasuk.edit');
-Route::put('/suratmasuk/{id}/update',[SuratMasukController::class,'update'])->name('suratmasuk.update');
+Route::put('/suratmasuk/{id}/update', [SuratMasukController::class,'update'])->name('suratmasuk.update');
+Route::delete('/suratmasuk/{id}/delete', [SuratMasukController::class,'destroy'])->name('suratmasuk.delete');
 
-Route::get('/suratkeluar',[SuratKeluarController::class, "index"])->name('suratkeluar');
+Route::get('/suratkeluar', [SuratKeluarController::class, "index"])->name('suratkeluar');
 Route::get('/tambahsuratkeluar', [SuratKeluarController::class, "create"]);
 Route::post('/daftarsuratkeluar/store', [SuratKeluarController::class, "store"]);
 Route::get('/suratkeluar/{id}/edit', [SuratKeluarController::class, 'edit'])->name('suratkeluar.edit');
-Route::put('/suratkeluar/{id}/update',[SuratKeluarController::class,'update'])->name('suratkeluar.update');
-Route::get('/reportsuratmasuk',[ReportMasukController::class, "Reportsurat"]);
-Auth::routes();
+Route::put('/suratkeluar/{id}/update', [SuratKeluarController::class,'update'])->name('suratkeluar.update');
+Route::delete('/suratkeluar/{id}/delete', [SuratKeluarController::class,'destroy'])->name('suratkeluar.delete');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/reportsuratmasuk', [ReportMasukController::class, "Reportsurat"]);
+Route::post('/daftarreportsuratmasuk', [ReportMasukController::class, "getreport"])->name('getreport');
 
 Auth::routes();
 

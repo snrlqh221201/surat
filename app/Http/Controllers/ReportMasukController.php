@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReportMasuk;
+use App\Models\SuratMasuk;
+use App\Models\UnitKerja;
 use Illuminate\Http\Request;
 
 class ReportMasukController extends Controller
@@ -13,7 +15,27 @@ class ReportMasukController extends Controller
     public function Reportsurat()
     {
         $data = ReportMasuk::all();
-        return view ('admin.reportsurat.suratmasuk.index', compact('data'));
+        $unitKerja = UnitKerja::select(['id', 'namaunit'])->get();
+    
+        return view ('admin.reportsurat.suratmasuk.index', compact('data', 'unitKerja'));
+    }
+
+
+    public function getreport(Request $request)
+    {
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $unitKerja = $request->unitKerja;
+
+        $suratmasuk = SuratMasuk::with('unitKerja')->whereBetween('tanggal', [$dari, $sampai]);
+
+        if ($unitKerja !== 'all') {
+            $suratmasuk->where('unit_kerja_id', $unitKerja);
+        }
+
+        $suratmasuk = $suratmasuk->get();
+
+        return response()->json($suratmasuk);
     }
 
     /**

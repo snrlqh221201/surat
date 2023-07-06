@@ -42,7 +42,7 @@ class PenggunaController extends Controller
             'unit_kerja_id'=> $request->unit_kerja_id,
         ]);
 
-        return redirect('pengguna');
+        return redirect()->route('pengguna')->with('message', 'Data berhasil dibuat!');
     }
 
     /**
@@ -73,18 +73,20 @@ class PenggunaController extends Controller
         $data->usrname = $request->username;
         $data->nama = $request->nama;
         $data->hakakses = $request->hakakses; 
-        $data->namaunit = $request->unit_kerja_id;
+        $data->unit_kerja_id = $request->unit_kerja_id;
 
         $data->update();
 
-        return redirect()->route('pengguna.index');
+        return redirect()->route('pengguna.index')->with('message', 'Data berhasil diperbarui!');
     }
-
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(pengguna $pengguna)
+    public function destroy($id)
     {
-        //
+        $data = Pengguna::findOrFail($id);
+        $data->delete();
+
+        return back()->with('message','Data berhasil didelete!');
     }
 }

@@ -5,6 +5,11 @@
     <!-- DataTales Example -->
     <section class="content">
         <div class="container-fluid">
+            @if(session('message'))
+                <div id="pesan-flash" class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card">
