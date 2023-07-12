@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/" class="brand-link">
+    <a href="{{ route('dashboard') }}" class="brand-link">
     <center>
       <span class="brand-text font-weight-light">Arsip Surat</span> 
     </center>
@@ -23,10 +23,9 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+          <!-- Add icons to the links using the .nav-icon class with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="/" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
+            <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('/') ? 'active' : '' }}">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -34,7 +33,7 @@
             </a>
           </li>
           <li class="nav-item dropdown">
-            <a href="#" class="nav-link {{ request()->is('dropdown*') ? 'active' : '' }}">
+            <a href="#" class="nav-link">
               <i class="nav-icon fas fa-user-cog"></i>
               <p>
                 Setup Management
@@ -44,13 +43,13 @@
             <ul class="nav nav-treeview">
               </li>
               <li class="nav-item">
-                <a href="{{ route('unitkerja.index') }}" class="nav-link {{ request()->is('unitkerja.index') ? 'active' : '' }}">
+                <a href="{{ route('unitkerja.index') }}" class="nav-link {{ request()->is('unitkerja') ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle text-warning"></i>
                   <p>Unit Kerja</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/pengguna" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
+                <a href="{{ route('pengguna.index') }}" class="nav-link {{ request()->is('pengguna') ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle text-info"></i>
                   <p>Pengguna</p>
                 </a>
@@ -58,14 +57,14 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="/suratmasuk" class="nav-link {{ request()->is('suratmasuk') ? 'active' : '' }}">
+            <a href="{{ route('suratmasuk.index') }}" class="nav-link {{ request()->is('suratmasuk') ? 'active' : '' }}">
               <i class= "nav-icon far fa-envelope"></i>
               <p>
                 Surat Masuk
               </p>
             </a>
             <li class="nav-item">
-              <a href="/suratkeluar" class="nav-link {{ request()->is('suratkeluar') ? 'active' : '' }}">
+              <a href="{{ route('suratkeluar.index') }}" class="nav-link {{ request()->is('suratkeluar') ? 'active' : '' }}">
                 <i class= "nav-icon far fa-envelope"></i>
                 <p>
                   Surat Keluar
@@ -83,13 +82,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="{{ route('reportsuratmasuk.index') }}" class="nav-link">
+                <a href="{{ route('reportsuratmasuk.index') }}" class="nav-link {{ request()->is('reportsuratmasuk') ? 'active' : '' }}">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>Surat Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('reportsuratkeluar.index') }}" class="nav-link">
+                <a href="{{ route('reportsuratkeluar.index') }}" class="nav-link {{ request()->is('reportsuratkeluar') ? 'active' : '' }}">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>Surat Keluar</p>
                 </a>
