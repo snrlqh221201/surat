@@ -129,6 +129,10 @@
       // 
     });
   });
+
+  setTimeout(function() {
+      document.getElementById('pesan-flash').remove();
+  }, 4000); // Menghilangkan pesan setelah 4 detik (4000 milidetik)
 </script>
 </body>
 </html>

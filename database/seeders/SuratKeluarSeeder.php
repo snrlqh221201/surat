@@ -13,14 +13,13 @@ class SuratKeluarSeeder extends Seeder
      */
     public function run(): void
     {
-        
         SuratKeluar::create([
-            'tanggal' => '12 may 2023',
-            'nosurat' => '01/08/20/2023',
-            'perihal' => 'callcenter',
-            'sifatsurat'=>'penting',
+            'tanggal' => '2023/07/11',
+            'nosurat' => '12/23/0409',
+            'perihal' => 'Call Center',
+            'sifat_surat'=>'Penting',
             'unit_kerja_id' => 1,
-            'kepada' => 'pt.kominfo',
+            'kepada' => 'PT. Kominfo',
         ]);
     }
 }

@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class PenggunaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $data = Pengguna::with('unitKerja')->get();
@@ -19,9 +22,6 @@ class PenggunaController extends Controller
         
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         $unitKerja = UnitKerja::pluck('namaunit', 'id');
@@ -30,9 +30,6 @@ class PenggunaController extends Controller
     }
     
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         Pengguna::create([
@@ -42,20 +39,16 @@ class PenggunaController extends Controller
             'unit_kerja_id'=> $request->unit_kerja_id,
         ]);
 
-        return redirect()->route('pengguna')->with('message', 'Data berhasil dibuat!');
+        return redirect()->route('pengguna.index')->with('message', 'Data berhasil dibuat!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(pengguna $pengguna)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+
     public function edit($id)
     {
         $data = Pengguna::findOrFail($id);
@@ -64,9 +57,7 @@ class PenggunaController extends Controller
         return view ('admin.setupmanagement.pengguna.edit', compact('data', 'unitkerjas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+
     public function update(Request $request, $id)
     {
         $data = Pengguna::findOrFail($id);
@@ -79,9 +70,8 @@ class PenggunaController extends Controller
 
         return redirect()->route('pengguna.index')->with('message', 'Data berhasil diperbarui!');
     }
-    /**
-     * Remove the specified resource from storage.
-     */
+
+    
     public function destroy($id)
     {
         $data = Pengguna::findOrFail($id);

@@ -8,9 +8,12 @@ use Illuminate\Http\Request;
 
 class SuratMasukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $data = SuratMasuk::with('unitKerja')->get();
@@ -18,9 +21,7 @@ class SuratMasukController extends Controller
         return view ('admin.suratmasuk.index', compact('data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    
     public function create()
     {
         $unitKerja = UnitKerja::pluck('namaunit', 'id');
@@ -28,34 +29,42 @@ class SuratMasukController extends Controller
         return view ('admin.suratmasuk.add', compact('unitKerja'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        SuratMasuk::create([
+        $request->validate([
+            'file_surat' => 'mimes:pdf,doc,docx|max:2048',
+        ], [
+            'file_surat.mimes' => 'Berkas harus dalam format PDF, DOC, atau DOCX.',
+            'file_surat.max' => 'Ukuran berkas maksimum adalah 2MB.',
+        ]);
+
+        $data = SuratMasuk::create([
             'tanggal' => $request->tanggal,
             'nosurat' => $request->nosurat,
             'perihal' =>$request->perihal,
             'sifat_surat' => $request->sifat_surat,
             'pengirim'=> $request->pengirim,
             'unit_kerja_id'=> $request->unit_kerja_id,
+            'file_surat'=> $request->file_surat,
         ]);
+
+        if ($request->hasFile('file_surat')) {
+            $request->file('file_surat')->move('surat/surat masuk', $request->file('file_surat')->getClientOriginalname());
+            $data->file_surat = 'surat/surat masuk/'.$request->file('file_surat')->getClientOriginalname();
+            $data->save();
+        }
         
-        return redirect()->route('suratmasuk')->with('message', 'Data berhasil dibuat!');
+        return redirect()->route('suratmasuk.index')->with('message', 'Data berhasil dibuat!');
     }
 
-    /**
-     * Display the specified resource.
-     */
+    
     public function show(SuratMasuk $suratMasuk)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+    
     public function edit($id)
     {
         $data = SuratMasuk::findOrFail($id);
@@ -64,11 +73,16 @@ class SuratMasukController extends Controller
         return view('admin.suratmasuk.edit', compact('data', 'unitkerjas'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'file_surat' => 'mimes:pdf,doc,docx|max:2048',
+        ], [
+            'file_surat.mimes' => 'Berkas harus dalam format PDF, DOC, atau DOCX.',
+            'file_surat.max' => 'Ukuran berkas maksimum adalah 2MB.',
+        ]);
+        
         $data = SuratMasuk::findOrFail($id);
 
         $data->tanggal = $request->tanggal;
@@ -78,14 +92,17 @@ class SuratMasukController extends Controller
         $data->pengirim = $request->pengirim;
         $data->unit_kerja_id = $request->unit_kerja_id;
 
+        if ($request->hasFile('file_surat')) {
+            $request->file('file_surat')->move('surat/surat masuk', $request->file('file_surat')->getClientOriginalname());
+            $data->file_surat = 'surat/surat masuk/'.$request->file('file_surat')->getClientOriginalname();
+        }
+        
         $data->update();
 
-        return redirect()->route('suratmasuk')->with('message', 'Data berhasil diperbarui!');
+        return redirect()->route('suratmasuk.index')->with('message', 'Data berhasil diperbarui!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
     public function destroy($id)
     {
         $data = SuratMasuk::findOrFail($id);

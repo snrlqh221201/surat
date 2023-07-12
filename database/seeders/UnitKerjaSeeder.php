@@ -16,5 +16,9 @@ class UnitKerjaSeeder extends Seeder
         Unitkerja::create([
             'namaunit' => 'Kepala Desa',
         ]);
+        
+        Unitkerja::create([
+            'namaunit' => 'Kaur Umum',
+        ]);
     }
 }

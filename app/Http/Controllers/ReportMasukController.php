@@ -9,10 +9,13 @@ use Illuminate\Http\Request;
 
 class ReportMasukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function Reportsurat()
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
+    public function index()
     {
         $data = ReportMasuk::all();
         $unitKerja = UnitKerja::select(['id', 'namaunit'])->get();
@@ -21,68 +24,20 @@ class ReportMasukController extends Controller
     }
 
 
-    public function getreport(Request $request)
+    public function store(Request $request)
     {
         $dari = $request->dari;
         $sampai = $request->sampai;
         $unitKerja = $request->unitKerja;
 
-        $suratmasuk = SuratMasuk::with('unitKerja')->whereBetween('tanggal', [$dari, $sampai]);
-
+        $suratmasuk = SuratMasuk::with('unitKerja')->whereBetween('tanggal', [$dari , $sampai])->orderBy('tanggal', 'asc');
+        
         if ($unitKerja !== 'all') {
             $suratmasuk->where('unit_kerja_id', $unitKerja);
         }
-
+        
         $suratmasuk = $suratmasuk->get();
 
-        return response()->json($suratmasuk);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ReportMasuk $reportMasuk)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ReportMasuk $reportMasuk)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ReportMasuk $reportMasuk)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ReportMasuk $reportMasuk)
-    {
-        //
+        return view('admin.reportsurat.suratmasuk.show', compact('suratmasuk'));
     }
 }

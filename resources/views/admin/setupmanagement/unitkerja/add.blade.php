@@ -10,12 +10,12 @@
                         <div class="card-header">
                             <h3 class="card-title">Unit Kerja</h3>
                         </div>
-                        <form method="POST" action="/daftarunitkerja/store">
+                        <form method="POST" action="{{ route('unitkerja.store') }}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputUnit">Nama Unit Kerja</label>
-                                    <input type="text" name="namaunit" class="form-control" id="exampleInputUnit" placeholder="Masukkan Unit Kerja">
+                                    <input type="text" name="namaunit" class="form-control" id="exampleInputUnit" placeholder="Masukkan Unit Kerja" class="form-control" required />
                                 </div>
                             </div>
                             <div class="card-footer">

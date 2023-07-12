@@ -9,20 +9,20 @@
                         <div class="card-header">
                             <h3 class="card-title">Data Pengguna</h3>
                         </div>
-                        <form method="POST" action="/daftarpengguna/store">
+                        <form method="POST" action="{{ route('pengguna.store') }}">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputPengguna">Username</label>
-                                    <input type="text" name="username" class="form-control" id="exampleInputusername" placeholder="Masukkan Username">
+                                    <input type="text" name="username" class="form-control" id="exampleInputusername" placeholder="Masukkan Username"class="form-control" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPengguna">Nama</label>
-                                    <input type="text" name="nama" class="form-control" id="exampleInputnama" placeholder="Masukkan Nama">
+                                    <input type="text" name="nama" class="form-control" id="exampleInputnama" placeholder="Masukkan Nama"class="form-control" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPengguna">Hak akses</label>
-                                    <input type="text" name="hakakses" class="form-control" id="exampleInputhakakses" placeholder="Masukkan Hak Akses">
+                                    <input type="text" name="hakakses" class="form-control" id="exampleInputhakakses" placeholder="Masukkan Hak Akses"class="form-control" required />
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputSuratMasuk">Unit Kerja</label>

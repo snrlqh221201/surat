@@ -9,8 +9,8 @@
                         <div class="card-header">
                             <h3 class="card-title">Edit Surat Masuk</h3>
                         </div>
-                        <form action="{{ route('suratmasuk.update', $data->id) }}" method="POST">
-                             @method('put')
+                        <form action="{{ route('suratmasuk.update', $data->id) }}" method="POST" enctype="multipart/form-data">
+                            @method('put')
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -43,6 +43,13 @@
                                             <option value="{{ $item->id }}" {{ $item->id == $data->unit_kerja_id ? 'selected' : '' }}>{{ $item->namaunit }}</option>
                                         @endforeach
                                     </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="uploadSurat">Upload Surat</label>
+                                    <input type="file" class="form-control @error('file_surat') is-invalid @enderror" id="uploadSurat" aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="file_surat">
+                                    @error('file_surat')
+                                        <span class="invalid-feedback">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="card-footer">

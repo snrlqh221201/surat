@@ -3,63 +3,42 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReportKeluar;
+use App\Models\SuratKeluar;
+use App\Models\UnitKerja;
 use Illuminate\Http\Request;
+use SebastianBergmann\CodeCoverage\Report\Xml\Report;
 
 class ReportKeluarController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    
     public function index()
     {
-        //
+        $data = ReportKeluar::all();
+        $unitKerja = UnitKerja::select(['id', 'namaunit'])->get();
+    
+        return view ('admin.reportsurat.suratkeluar.index', compact('data', 'unitKerja'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $dari = $request->dari;
+        $sampai = $request->sampai;
+        $unitKerja = $request->unitKerja;
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ReportKeluar $reportKeluar)
-    {
-        //
-    }
+        $suratkeluar = SuratKeluar::with('unitKerja')->whereBetween('tanggal', [$dari , $sampai])->orderBy('tanggal', 'asc');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ReportKeluar $reportKeluar)
-    {
-        //
-    }
+        if ($unitKerja !== 'all') {
+            $suratkeluar->where('unit_kerja_id', $unitKerja);
+        }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, ReportKeluar $reportKeluar)
-    {
-        //
-    }
+        $suratkeluar = $suratkeluar->get();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ReportKeluar $reportKeluar)
-    {
-        //
+        return view('admin.reportsurat.suratkeluar.show', compact('suratkeluar'));
     }
 }

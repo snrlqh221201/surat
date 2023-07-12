@@ -14,7 +14,7 @@ class SuratMasukSeeder extends Seeder
     public function run(): void
     {
         SuratMasuk::create([                                                
-            'tanggal' => '2023/05/12',
+            'tanggal' => '2023/07/11',
             'nosurat' => '12/23/0409',
             'perihal' => 'Riset Penelitian',
             'sifat_surat' => 'Penting',

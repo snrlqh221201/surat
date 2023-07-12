@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('sifat_surat');
             $table->string('pengirim');
             $table->unsignedBigInteger('unit_kerja_id');
+            $table->string('file_surat')->nullable();
             $table->timestamps();
         });
     }

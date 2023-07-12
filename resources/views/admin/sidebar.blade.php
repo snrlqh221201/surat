@@ -1,9 +1,9 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-    <center> 
-      <span class="brand-text font-weight-light">Arsip_Surat</span> 
-    </center> 
+    <a href="/" class="brand-link">
+    <center>
+      <span class="brand-text font-weight-light">Arsip Surat</span> 
+    </center>
     </a>
 
     <!-- Sidebar -->
@@ -44,7 +44,7 @@
             <ul class="nav nav-treeview">
               </li>
               <li class="nav-item">
-                <a href="/unitkerja" class="nav-link {{ request()->is('unitkerja') ? 'active' : '' }}">
+                <a href="{{ route('unitkerja.index') }}" class="nav-link {{ request()->is('unitkerja.index') ? 'active' : '' }}">
                   <i class="nav-icon far fa-circle text-warning"></i>
                   <p>Unit Kerja</p>
                 </a>
@@ -83,13 +83,13 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/reportsuratmasuk" class="nav-link">
+                <a href="{{ route('reportsuratmasuk.index') }}" class="nav-link">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>Surat Masuk</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/forms/advanced.html" class="nav-link">
+                <a href="{{ route('reportsuratkeluar.index') }}" class="nav-link">
                   <i class="fas fa-circle nav-icon"></i>
                   <p>Surat Keluar</p>
                 </a>
